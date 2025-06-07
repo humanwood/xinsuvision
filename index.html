@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心速视觉 - 创始人IP影响力缔造者</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        }
+        .hero-bg {
+            background-color: #FFFBEB; /* amber-50 */
+        }
+        .section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700;
+            color: #1E293B; /* slate-800 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            text-align: center;
+        }
+        .section-subtitle {
+            font-size: 1.125rem; /* text-lg */
+            color: #475569; /* slate-600 */
+            margin-bottom: 2.5rem; /* mb-10 */
+            text-align: center;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .active-nav {
+            color: #0D9488; /* teal-600 */
+            font-weight: 600;
+        }
+        .pain-point-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .pain-point-card .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .pain-point-card.open .details {
+            max-height: 500px; /* Adjust as needed */
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .stat-card {
+            background-color: #F0FDFA; /* teal-50 */
+            border-left: 4px solid #0D9488; /* teal-600 */
+        }
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        .case-study-card img {
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            cursor: pointer; /* Add cursor pointer for clickable images */
+        }
+        .b2b-clients-img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Video Modal Styles */
+        .video-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .video-modal-content {
+            background-color: #111; /* Dark background for video player */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden; /* To contain the video */
+        }
+        .video-modal-content video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+        .video-modal-close {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #fff;
+            color: #333;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1001; /* Ensure close button is above video */
+        }
+         .video-modal-close:hover {
+            background-color: #eee;
+        }
+
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <nav id="navbar" class="bg-white/80 backdrop-blur-md shadow-md fixed w-full z-50 top-0">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <a href="#hero" class="text-2xl font-bold text-teal-600">心速视觉</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#why-ip" class="nav-link hover:text-teal-600 transition-colors">为何选择IP</a>
+                    <a href="#solution" class="nav-link hover:text-teal-600 transition-colors">解决方案</a>
+                    <a href="#cases" class="nav-link hover:text-teal-600 transition-colors">成功案例</a>
+                    <a href="#pricing" class="nav-link hover:text-teal-600 transition-colors">服务价格</a>
+                    <a href="#contact" class="nav-link hover:text-teal-600 transition-colors">联系我们</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-700 hover:text-teal-600 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="#why-ip" class="block py-2 px-4 text-sm hover:bg-teal-50 nav-link-mobile">为何选择IP</a>
+            <a href="#solution" class="block py-2 px-4 text-sm hover:bg-teal-50 nav-link-mobile">解决方案</a>
+            <a href="#cases" class="block py-2 px-4 text-sm hover:bg-teal-50 nav-link-mobile">成功案例</a>
+            <a href="#pricing" class="block py-2 px-4 text-sm hover:bg-teal-50 nav-link-mobile">服务价格</a>
+            <a href="#contact" class="block py-2 px-4 text-sm hover:bg-teal-50 nav-link-mobile">联系我们</a>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero-bg pt-24 pb-16 md:pt-32 md:pb-24">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-slate-800 mb-6">
+                未来的商业领袖：<span class="text-amber-500">有IP者，风生水起</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-3xl mx-auto">
+                心速视觉，隶属于深圳艺心灵文化传媒有限公司，我们专注创始人IP影像的精心打造，助您塑造卓越影响力，引爆企业品牌价值，实现商业腾飞。
+            </p>
+            <a href="#solution" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform transform hover:scale-105 text-lg">
+                了解我们的服务
+            </a>
+        </div>
+    </section>
+
+    <section id="why-ip" class="py-16 md:py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="section-title">为何创始人需要打造个人IP？</h2>
+            <p class="section-subtitle">
+                在竞争激烈的市场中，个人IP是建立信任、吸引机遇、实现持续增长的关键。忽视IP建设，可能意味着错失发展的黄金机会。
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center mb-12">
+                <div>
+                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">IP鸿沟：对您企业的影响</h3>
+                    <p class="text-slate-600 mb-4">“未来的创始人分为有IP和没有IP两种，有IP的创始人风生水起，没有IP的创始人默默无闻。” 这种差距正日益扩大，深刻影响着企业的方方面面。</p>
+                    <div class="overflow-x-auto rounded-lg shadow">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-teal-500 text-white">
+                                <tr>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">特征</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">拥有强大IP的创始人</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">缺乏IP的创始人</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-700">
+                                <tr class="border-b">
+                                    <td class="text-left py-3 px-4">市场能见度</td>
+                                    <td class="text-left py-3 px-4">高，易于被目标受众发现</td>
+                                    <td class="text-left py-3 px-4">低，淹没在众多竞争者之中</td>
+                                </tr>
+                                <tr class="border-b bg-slate-50">
+                                    <td class="text-left py-3 px-4">品牌信誉度</td>
+                                    <td class="text-left py-3 px-4">强，更易获得信任与认可</td>
+                                    <td class="text-left py-3 px-4">弱，建立信任需更长时间</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="text-left py-3 px-4">潜在客户获取</td>
+                                    <td class="text-left py-3 px-4">持续稳定，IP自带流量</td>
+                                    <td class="text-left py-3 px-4">零星，依赖传统推广</td>
+                                </tr>
+                                 <tr class="border-b bg-slate-50">
+                                    <td class="text-left py-3 px-4">人才吸引力</td>
+                                    <td class="text-left py-3 px-4">更强，优秀人才乐于追随</td>
+                                    <td class="text-left py-3 px-4">较弱，难以吸引顶尖人才</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left py-3 px-4">业务增长速度</td>
+                                    <td class="text-left py-3 px-4">加速，IP势能驱动扩张</td>
+                                    <td class="text-left py-3 px-4">缓慢或停滞，增长乏力</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/IP%E9%B8%BF%E6%B2%9F%E7%A4%BA%E6%84%8F%E5%9B%BE%281%29.png" alt="IP鸿沟示意图" class="rounded-lg shadow-xl mx-auto">
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold text-slate-800 mb-6 text-center mt-16">您是否也面临这些IP打造痛点？</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="pain-point-card bg-amber-50 p-6 rounded-lg shadow hover:shadow-lg">
+                    <div class="flex items-center text-amber-600 mb-3">
+                        <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.79 4 4s-1.79 4-4 4c-1.742 0-3.223-.835-3.772-2M12 12H4m4 4H4m4-8H4m12 4h2m-2 4h2m-2-8h2"></path></svg>
+                        <h4 class="text-xl font-semibold">不会讲故事</h4>
+                    </div>
+                    <p class="text-slate-600 text-sm">难以组织引人入胜的叙事，找不到独特的个人声音，不懂如何架构自己的故事。</p>
+                    <button class="text-amber-700 text-sm font-semibold mt-2 pain-point-toggle">查看更多 &raquo;</button>
+                    <div class="details mt-2 text-sm text-slate-500">
+                        <p>无法清晰表达个人理念与价值，导致IP定位模糊，内容缺乏吸引力。</p>
+                    </div>
+                </div>
+                <div class="pain-point-card bg-amber-50 p-6 rounded-lg shadow hover:shadow-lg">
+                    <div class="flex items-center text-amber-600 mb-3">
+                         <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        <h4 class="text-xl font-semibold">不敢去表达</h4>
+                    </div>
+                    <p class="text-slate-600 text-sm">在公众面前展示自我时犹豫，担心外界评价，不确定如何真实呈现自己。</p>
+                    <button class="text-amber-700 text-sm font-semibold mt-2 pain-point-toggle">查看更多 &raquo;</button>
+                    <div class="details mt-2 text-sm text-slate-500">
+                        <p>镜头恐惧、表达不自信，使得个人魅力无法充分展现，影响IP的亲和力与信任度。</p>
+                    </div>
+                </div>
+                <div class="pain-point-card bg-amber-50 p-6 rounded-lg shadow hover:shadow-lg">
+                    <div class="flex items-center text-amber-600 mb-3">
+                        <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <h4 class="text-xl font-semibold">不会拍视频</h4>
+                    </div>
+                    <p class="text-slate-600 text-sm">缺乏专业技术、设备或知识来制作高质量视觉内容，传统方式成本高昂且耗时。</p>
+                    <button class="text-amber-700 text-sm font-semibold mt-2 pain-point-toggle">查看更多 &raquo;</button>
+                    <div class="details mt-2 text-sm text-slate-500">
+                        <p>视频质量参差不齐，无法有效传递品牌价值，难以在海量内容中脱颖而出。</p>
+                    </div>
+                </div>
+                <div class="pain-point-card bg-amber-50 p-6 rounded-lg shadow hover:shadow-lg">
+                    <div class="flex items-center text-amber-600 mb-3">
+                        <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                        <h4 class="text-xl font-semibold">不能去转化</h4>
+                    </div>
+                    <p class="text-slate-600 text-sm">IP努力未能带来实际商业成果，如潜在客户或销售额增长，影响力无法变现。</p>
+                    <button class="text-amber-700 text-sm font-semibold mt-2 pain-point-toggle">查看更多 &raquo;</button>
+                    <div class="details mt-2 text-sm text-slate-500">
+                        <p>缺乏清晰的商业变现路径和运营策略，导致IP投入产出不成正比，难以持续发展。</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-10 text-slate-600">“老板要么把学费交在课堂上，要么把学费交到市场上。” 选择专业的IP打造伙伴，是规避风险、加速成功的明智之举。</p>
+        </div>
+    </section>
+
+    <section id="solution" class="py-16 md:py-24 bg-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="section-title">心速视觉：您IP创建与商业变现的伙伴</h2>
+            <p class="section-subtitle">
+                我们不仅解决您的痛点，更激发您的潜能，引爆您的“爽点”！我们提供从战略IP发展、引人入胜的视频制作，到AI驱动的效率提升及商业变现路径规划的全方位解决方案。
+            </p>
+
+            <div class="bg-white p-8 md:p-12 rounded-xl shadow-xl mb-16">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/3 text-center">
+                        <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E4%BA%BF%E5%A7%90%281%29.jpg" alt="亿姐 - 心速视觉创始人" class="rounded-full shadow-lg mx-auto w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-amber-400">
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">遇见领路人：亿姐 (彭奕钶)</h3>
+                        <p class="text-amber-600 font-semibold mb-4">心速视觉创始人 | 创始人IP影像缔造者 | 视频号精准获客教练 | 中小企业商业营销导师</p>
+                        <p class="text-slate-600 mb-6">
+                            亿姐是心速视觉的灵魂人物，凭借其在新媒体领域的深厚积累和对创始人IP打造的深刻洞察，已成功赋能众多企业家。她不仅精通影像创作，更擅长将IP影响力转化为切实的商业价值。
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                            <div class="stat-card p-4 rounded-lg">
+                                <p class="text-3xl font-bold text-teal-600">8年+</p>
+                                <p class="text-sm text-slate-500">创始人IP打造经验</p>
+                            </div>
+                            <div class="stat-card p-4 rounded-lg">
+                                <p class="text-3xl font-bold text-teal-600">136位+</p>
+                                <p class="text-sm text-slate-500">服务企业家数量</p>
+                            </div>
+                            <div class="stat-card p-4 rounded-lg">
+                                <p class="text-3xl font-bold text-teal-600">90%+</p>
+                                <p class="text-sm text-slate-500">AI赋能变现成功率</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white p-8 md:p-12 rounded-xl shadow-xl mb-16">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/3 text-center">
+                        <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/A%E6%80%BB%E5%A4%B4%E5%83%8F.png" alt="A总 - 心速视觉创始人" class="rounded-full shadow-lg mx-auto w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-sky-500">
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-3xl font-bold text-teal-700 mb-3">AI策航者：A总 (ALEX)</h3>
+                        <p class="text-amber-600 font-semibold mb-4">心速视觉联合创始人 | 创始人IP影像设计师 | 千万级社交平台运营官 | 中小企业商业AI导师</p>
+                        <p class="text-slate-600 mb-6">
+                            A总心速视觉的联合创始人，拥有20年跨界实战经验，擅长将AI技术与业务深度融合，推动智能内容、私域运营与硬件创新落地。他以技术驱动增长，赋能多家企业实现数智化升级，是AI商业化路径的深度践行者。
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                            <div class="stat-card p-4 rounded-lg">
+                                <p class="text-3xl font-bold text-teal-600">10年+</p>
+                                <p class="text-sm text-slate-500">互联网运营经验</p>
+                            </div>
+                            <div class="stat-card p-4 rounded-lg">
+                                <p class="text-3xl font-bold text-teal-600">1000+</p>
+                                <p class="text-sm text-slate-500">赋能B端用户数量</p>
+                            </div>
+                            <div class="stat-card p-4 rounded-lg">
+                                <p class="text-3xl font-bold text-teal-600">3000万+</p>
+                                <p class="text-sm text-slate-500">服务C端用户数量</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-slate-800 mb-8 text-center">我们的核心服务</h3>
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white p-8 rounded-xl shadow-lg service-card">
+                    <div class="flex items-center text-teal-600 mb-4">
+                         <svg class="w-10 h-10 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <h4 class="text-2xl font-bold">创始人IP影像拍摄 (重点推荐)</h4>
+                    </div>
+                    <p class="text-slate-600 mb-4">通过“IP人生故事视频拍摄”，运用专业的“故事化叙事”手法，深度挖掘和呈现创始人的独特经历与魅力。我们不仅仅是拍摄，更提供“个人品牌孵化”策略与“全网传播矩阵”执行，确保您的IP故事深入人心。</p>
+                    <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                        <li>个性化IP定位与故事策划</li>
+                        <li>专业级视频拍摄与制作</li>
+                        <li>个人品牌形象塑造与提升</li>
+                        <li>多平台内容分发与推广策略</li>
+                    </ul>
+                    <p class="mt-4 text-teal-700 font-semibold">价格：6980元起</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg service-card">
+                     <div class="flex items-center text-teal-600 mb-4">
+                        <svg class="w-10 h-10 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        <h4 class="text-2xl font-bold">企业宣传片拍摄</h4>
+                    </div>
+                    <p class="text-slate-600 mb-4">我们追求“电影级制作”标准，打造具有视觉震撼力和情感穿透力的企业宣传片。助您的企业品牌快速传播，有效促进业绩增长，在市场中树立卓越形象。</p>
+                     <ul class="list-disc list-inside text-slate-600 space-y-1 text-sm">
+                        <li>企业品牌故事深度挖掘</li>
+                        <li>创意脚本策划与撰写</li>
+                        <li>高清电影级拍摄与精良后期</li>
+                        <li>助力品牌形象升级与市场推广</li>
+                    </ul>
+                    <p class="mt-4 text-teal-700 font-semibold">价格：19800元起</p>
+                </div>
+            </div>
+
+            <div class="bg-teal-50 p-8 rounded-xl shadow-lg mb-16">
+                <h3 class="text-2xl font-bold text-teal-700 mb-6 text-center">AI赋能优势：效率、创新、影响力</h3>
+                <p class="text-center text-slate-600 mb-8 max-w-2xl mx-auto">我们独家AI视频解决方案，贯穿IP打造全流程，为您带来前所未有的效率提升和创新可能，让高阶IP打造普惠化。</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <div class="text-amber-500 mb-3"><svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">AI-IP定位</h4>
+                        <p class="text-sm text-slate-500">精准分析市场与用户，确保IP战略方向准确无误。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <div class="text-amber-500 mb-3"><svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">AI数字人</h4>
+                        <p class="text-sm text-slate-500">规模化内容生产，制作成本降低高达80%。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <div class="text-amber-500 mb-3"><svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">智能剪辑</h4>
+                        <p class="text-sm text-slate-500">数小时剪辑工作缩短至几分钟，大幅提升效率。</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <div class="text-amber-500 mb-3"><svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+                        <h4 class="text-lg font-semibold text-teal-700 mb-2">AI内容生成</h4>
+                        <p class="text-sm text-slate-500">克服创作瓶颈，保持持续、高质量内容输出。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto bg-white p-6 rounded-xl shadow-xl">
+                 <h3 class="text-2xl font-semibold text-slate-800 mb-6 text-center">我们如何为您创造价值</h3>
+                <table class="min-w-full divide-y divide-slate-200">
+                    <thead class="bg-slate-100">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">您的痛点</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">心速视觉解决方案</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">触及“痒点” (渴望)</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">带来“爽点” (收益)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-slate-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">无法有效讲述故事</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">创始人IP故事纪录片 (故事化叙事)</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">与受众建立真实情感连接</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-teal-600">品牌故事深入人心，信任倍增</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">视频制作贵/耗时</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">AI智能剪辑 & AI数字人</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">轻松拥有专业级内容</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-teal-600">经济高效，解放创始人时间</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">IP未带来潜在客户</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">IP商业变现全案 & 流量运营</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">IP投入驱动业务增长</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-teal-600">可衡量的商业增长，影响力变现</td>
+                        </tr>
+                        <tr class="bg-slate-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">内容创作难，缺乏持续性</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">AI内容生成与规划</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">源源不断的创意和高质量内容</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-teal-600">克服创作瓶颈，保持品牌活跃</td>
+                        </tr>
+                         <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">个人影响力难以规模化</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">AI数字人分身矩阵 & 全网传播</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-600">品牌影响力最大化</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-teal-600">低成本实现品牌 omnipresence</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="cases" class="py-16 md:py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="section-title">转型的见证：客户成功故事</h2>
+            <p class="section-subtitle">
+                他们从“默默无闻”到“风生水起” – 您也可以！这些不仅仅是客户，更是我们转型之旅中的伙伴。
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-slate-50 rounded-xl shadow-lg overflow-hidden case-study-card">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E8%83%A1%E8%B4%9D%E5%84%BF%E5%88%9B%E5%A7%8B%E4%BA%BA%E8%83%A1%E5%BF%97%E5%88%9A%281%29%281%29.jpg" 
+                         alt="胡贝儿创始人董事长胡志刚" 
+                         class="w-full h-48 object-cover video-trigger"
+                         data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/hu-1.mp4"> <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-700 mb-2">胡贝儿创始人 胡志刚</h3>
+                        <p class="text-sm text-amber-600 mb-2">创始人IP | 千家线下门店企业</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">挑战:</strong> 传统企业家面临新媒体转型，需提升个人品牌影响力。</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">方案:</strong> 创始人IP故事纪录片，全网传播矩阵。</p>
+                        <p class="text-slate-600 text-sm"><strong class="text-slate-700">成果:</strong> 显著提升市场知名度，IP势能带动品牌发展。</p>
+                    </div>
+                </div>
+                 <div class="bg-slate-50 rounded-xl shadow-lg overflow-hidden case-study-card">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E5%AE%9D%E5%A6%88%E5%AD%A6%E5%A0%82%E9%BB%84%E9%9B%85%E7%90%A6%281%29%281%29.jpg" 
+                         alt="宝妈学堂黄雅琦" 
+                         class="w-full h-48 object-cover video-trigger"
+                         data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/huang.mp4"> <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-700 mb-2">宝妈学堂 黄雅琦</h3>
+                        <p class="text-sm text-amber-600 mb-2">创始人IP | 女性创业</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">挑战:</strong> 在竞争激烈的女性成长、创业领域建立个人品牌权威。</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">方案:</strong> AI赋能内容创作，精准定位IP故事。</p>
+                        <p class="text-slate-600 text-sm"><strong class="text-slate-700">成果:</strong> 成为领域内百万级大V，实现影响力快速变现。</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-xl shadow-lg overflow-hidden case-study-card">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E4%BD%99%E6%AD%8C%E6%BC%94%E8%AF%B4.png" 
+                         alt="余歌演说" 
+                         class="w-full h-48 object-cover video-trigger"
+                         data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/yuge2.mp4"> <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-700 mb-2">余歌演说</h3>
+                        <p class="text-sm text-amber-600 mb-2">商业教练IP | 成交演说</p>
+                         <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">挑战:</strong> 打造有深度、有温度的演说教练IP。</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">方案:</strong> 个人品牌孵化，IP商业变现全案。</p>
+                        <p class="text-slate-600 text-sm"><strong class="text-slate-700">成果:</strong> 成为行业标杆性人物，社群活跃，商业价值凸显。</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 rounded-xl shadow-lg overflow-hidden case-study-card">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E8%A3%95%E5%90%8C%E7%A7%91%E6%8A%80%E5%AE%A3%E4%BC%A0%E7%89%87.png" 
+                         alt="裕同科技" 
+                         class="w-full h-48 object-cover video-trigger"
+                         data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/yuto.mp4"> <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-700 mb-2">裕同科技</h3>
+                        <p class="text-sm text-amber-600 mb-2">企业宣传片 | 科技行业</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">挑战:</strong> 提升企业在行业内的品牌形象和国际认知度。</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">方案:</strong> 电影级企业宣传片定制，故事化叙事展现企业实力。</p>
+                        <p class="text-slate-600 text-sm"><strong class="text-slate-700">成果:</strong> 企业形象焕新，增强了客户与合作伙伴的信任。</p>
+                    </div>
+                </div>
+                 <div class="bg-slate-50 rounded-xl shadow-lg overflow-hidden case-study-card">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E6%B1%9F%E8%8B%8F%E4%B8%AD%E8%83%BD%E7%A1%85%E4%B8%9A.png" 
+                         alt="江苏中能硅业" 
+                         class="w-full h-48 object-cover video-trigger"
+                         data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/zhonggui.mp4"> <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-700 mb-2">江苏中能硅业</h3>
+                        <p class="text-sm text-amber-600 mb-2">企业宣传片 | 新能源行业</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">挑战:</strong> 在新兴行业中快速建立领导者形象。</p>
+                        <p class="text-slate-600 text-sm mb-1"><strong class="text-slate-700">方案:</strong> 高品质企业宣传片，展现技术创新与社会责任。</p>
+                        <p class="text-slate-600 text-sm"><strong class="text-slate-700">成果:</strong> 提升行业影响力，吸引高端人才与战略合作。</p>
+                    </div>
+                </div>
+                 <a href="more-stories.html" class="bg-slate-50 rounded-xl shadow-lg overflow-hidden case-study-card block hover:shadow-xl transition-shadow">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E6%9B%B4%E5%A4%9A%E6%88%90%E5%8A%9F%E6%95%85%E4%BA%8B%281%29.png" alt="更多成功故事" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-700 mb-2">更多成功故事</h3>
+                        <p class="text-sm text-amber-600 mb-2">点击查看更多案例</p>
+                        <p class="text-slate-600 text-sm mb-1">探索我们如何帮助更多企业家和品牌实现转型与增长。</p>
+                        <p class="text-teal-600 text-sm font-semibold mt-2">查看详情 &raquo;</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="b2b-clients" class="py-12 md:py-24 bg-slate-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800 mb-4 md:mb-6 text-center">他们也选择了心速视觉</h2>
+            <p class="section-subtitle text-sm sm:text-base md:text-lg mb-8 md:mb-10">
+                我们荣幸与众多优秀企业和机构深度合作，共同见证品牌力量的成长。
+            </p>
+            <div class="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-xl">
+                <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E6%9C%8D%E5%8A%A1%E5%A4%A7%E5%AE%A2%E6%88%B7%E5%90%8D%E5%8D%952_01.png" alt="合作大B端客户名单" class="rounded-md b2b-clients-img">
+            </div>
+        </div>
+    </section>
+
+
+    <section id="pricing" class="py-16 md:py-24 bg-white"> <div class="max-w-6xl mx-auto px-4">
+            <h2 class="section-title">投资您的影响力，收获指数级回报</h2>
+            <p class="section-subtitle">
+                我们提供透明的定价体系和卓越的价值方案。今天，您选择的不是一项服务，而是一个加速成功的伙伴。
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-slate-50 p-8 rounded-xl shadow-xl border-t-4 border-amber-500 text-center"> <h3 class="text-2xl font-bold text-slate-800 mb-2">创始人IP影像打造</h3>
+                    <p class="text-4xl font-extrabold text-teal-600 mb-4">¥6,980 <span class="text-lg font-normal text-slate-500">起</span></p>
+                    <p class="text-slate-600 mb-6">包含IP定位咨询、故事脚本策划、专业拍摄剪辑、基础AI赋能选项等。为您量身定制，打造专属个人品牌故事。</p>
+                    <ul class="text-sm text-slate-500 space-y-2 mb-6 text-left">
+                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>深度IP策略咨询</li>
+                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>个性化故事脚本创作</li>
+                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>专业级影像拍摄与制作</li>
+                    </ul>
+                    <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform transform hover:scale-105 inline-block">
+                        咨询详情
+                    </a>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-xl shadow-xl border-t-4 border-teal-500 text-center"> <h3 class="text-2xl font-bold text-slate-800 mb-2">企业宣传片</h3>
+                    <p class="text-4xl font-extrabold text-teal-600 mb-4">¥19,800 <span class="text-lg font-normal text-slate-500">起</span></p>
+                    <p class="text-slate-600 mb-6">包含品牌故事深度挖掘、创意脚本策划、电影级拍摄与精良后期制作。全面提升企业形象，助力市场推广。</p>
+                     <ul class="text-sm text-slate-500 space-y-2 mb-6 text-left">
+                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>企业品牌深度调研</li>
+                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>电影级创意与制作标准</li>
+                        <li class="flex items-center"><svg class="w-4 h-4 mr-2 text-teal-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>全方位后期与视效包装</li>
+                    </ul>
+                    <a href="#contact" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition-transform transform hover:scale-105 inline-block">
+                        咨询详情
+                    </a>
+                </div>
+            </div>
+            <p class="text-center mt-8 text-slate-500 text-sm">具体价格将根据您的定制化需求和项目范围确定。我们致力于提供超越价格的价值。</p>
+        </div>
+    </section>
+
+    <section id="contact" class="py-16 md:py-24 hero-bg">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="section-title">共筑您的传奇：即刻联络心速视觉</h2>
+            <p class="section-subtitle">
+                “您行动的速度，就是您拿结果的速度！” 不要让您的品牌停留在“默默无闻”，与心速视觉一起，迈向“风生水起”！
+            </p>
+            <div class="bg-white p-8 md:p-12 rounded-xl shadow-2xl max-w-3xl mx-auto">
+                <h3 class="text-2xl font-semibold text-teal-700 mb-6">立即咨询，开启您的创始人IP打造之旅！</h3>
+                <div class="grid sm:grid-cols-2 gap-8 mb-8">
+                    <div class="text-left">
+                        <p class="text-lg font-semibold text-slate-800">亿姐 (彭奕钶)</p>
+                        <p class="text-slate-600">电话: <a href="tel:17724631466" class="text-teal-600 hover:underline">177-2463-1466</a></p>
+                        <p class="text-slate-600">微信: yike1331 (或扫描下方二维码)</p>
+                        <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/%E4%BA%BF%E5%A7%90%E4%BA%8C%E7%BB%B4%E7%A0%81.png" alt="亿姐微信二维码" class="mt-2 rounded-md shadow-sm w-32 h-32 object-contain">
+                    </div>
+                    <div class="text-left">
+                        <p class="text-lg font-semibold text-slate-800">A总</p>
+                        <p class="text-slate-600">电话: <a href="tel:18823413927" class="text-teal-600 hover:underline">188-2341-3927</a></p>
+                        <p class="text-slate-600">微信: alexwoo (或扫描下方二维码)</p>
+                         <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/ALEX%E4%BA%8C%E7%BB%B4%E7%A0%81.jpg" alt="A总微信二维码" class="mt-2 rounded-md shadow-sm w-32 h-32 object-contain">
+                    </div>
+                </div>
+                <div class="bg-amber-100 border-l-4 border-amber-500 text-amber-700 p-4 rounded-md">
+                    <p class="font-semibold">特别福利！</p>
+                    <p>扫码添加亿姐或A总微信，即可获得<strong class="text-amber-800">一对一商业定位咨询机会 (价值2000元/小时)</strong>。</p>
+                </div>
+                 <p class="mt-8 text-slate-500 text-sm">深圳艺心灵文化传媒有限公司旗下品牌 - 心速视觉</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>&copy; <span id="currentYear"></span> 深圳艺心灵文化传媒有限公司. 心速视觉. 版权所有.</p>
+        </div>
+    </footer>
+
+    <div id="videoModal" class="video-modal-overlay">
+        <div id="videoModalContent" class="video-modal-content">
+            <button id="closeVideoModal" class="video-modal-close">&times;</button>
+            <video id="modalVideoPlayer" controls autoplay muted playsinline>
+                您的浏览器不支持HTML5视频。
+            </video>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Pain point card toggle
+        const painPointCards = document.querySelectorAll('.pain-point-card');
+        painPointCards.forEach(card => {
+            const toggleButton = card.querySelector('.pain-point-toggle');
+            toggleButton.addEventListener('click', (e) => { // Added event object e
+                e.stopPropagation(); // Prevent card click from triggering if button is inside
+                card.classList.toggle('open');
+                if (card.classList.contains('open')) {
+                    toggleButton.innerHTML = '收起详情 &laquo;';
+                } else {
+                    toggleButton.innerHTML = '查看更多 &raquo;';
+                }
+            });
+            // Allow clicking the whole card to toggle, except the button itself
+            card.addEventListener('click', (e) => {
+                if (e.target !== toggleButton && !toggleButton.contains(e.target)) {
+                     card.classList.toggle('open');
+                     if (card.classList.contains('open')) {
+                        toggleButton.innerHTML = '收起详情 &laquo;';
+                    } else {
+                        toggleButton.innerHTML = '查看更多 &raquo;';
+                    }
+                }
+            });
+        });
+        
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Active navigation link highlighting
+        const sections = document.querySelectorAll('section[id]'); // Ensure only sections with ID are selected
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navbar = document.getElementById('navbar');
+        
+        // Debounce function to limit scroll event handler frequency
+        function debounce(func, wait = 20, immediate = true) {
+            let timeout;
+            return function() {
+                const context = this, args = arguments;
+                const later = function() {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                const callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        }
+
+        const handleScroll = debounce(() => {
+            const navbarHeight = navbar ? navbar.offsetHeight : 0;
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - navbarHeight - 50; // Adjusted for navbar height and some offset
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active-nav');
+                if (link.getAttribute('href') && link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active-nav');
+                }
+            });
+            
+            // Sticky Nav Background Change
+            if (navbar) { // Check if navbar exists
+                if (window.pageYOffset > 50) {
+                    navbar.classList.add('bg-white/95');
+                    navbar.classList.remove('bg-white/80');
+                } else {
+                    navbar.classList.remove('bg-white/95');
+                    navbar.classList.add('bg-white/80');
+                }
+            }
+        });
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Initial call to set active link on page load
+
+
+        // Video Modal Functionality
+        const videoModal = document.getElementById('videoModal');
+        const videoModalContent = document.getElementById('videoModalContent');
+        const modalVideoPlayer = document.getElementById('modalVideoPlayer');
+        const closeVideoModalButton = document.getElementById('closeVideoModal');
+        const videoTriggers = document.querySelectorAll('.video-trigger');
+
+        videoTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default if it's an anchor or other element
+                const videoSrc = this.dataset.videoSrc;
+                if (videoSrc && videoModal && modalVideoPlayer && videoModalContent) {
+                    // Get original image dimensions
+                    const imgWidth = this.offsetWidth;
+                    const imgHeight = this.offsetHeight;
+
+                    // Set modal video player dimensions (2x image size)
+                    // Consider viewport constraints to prevent overflow
+                    const viewportWidth = window.innerWidth * 0.9; // 90% of viewport width
+                    const viewportHeight = window.innerHeight * 0.9; // 90% of viewport height
+
+                    let modalContentWidth = imgWidth * 2;
+                    let modalContentHeight = imgHeight * 2;
+                    
+                    // Adjust if 2x size exceeds viewport limits, maintaining aspect ratio
+                    const aspectRatio = imgWidth / imgHeight;
+
+                    if (modalContentWidth > viewportWidth) {
+                        modalContentWidth = viewportWidth;
+                        modalContentHeight = modalContentWidth / aspectRatio;
+                    }
+                    if (modalContentHeight > viewportHeight) {
+                        modalContentHeight = viewportHeight;
+                        modalContentWidth = modalContentHeight * aspectRatio;
+                    }
+                    
+                    // Ensure minimum size if image is very small
+                    modalContentWidth = Math.max(modalContentWidth, 320); // Min width 320px
+                    modalContentHeight = Math.max(modalContentHeight, 180); // Min height for 16:9
+
+                    videoModalContent.style.width = `${modalContentWidth}px`;
+                    videoModalContent.style.height = `${modalContentHeight}px`;
+                    
+                    modalVideoPlayer.src = videoSrc;
+                    videoModal.style.display = 'flex'; // Use flex to center content
+                    modalVideoPlayer.load(); // Ensure video loads new source
+                    modalVideoPlayer.play().catch(error => console.error("Video play failed:", error));
+                } else {
+                    console.error("Modal elements or video source not found for:", this);
+                }
+            });
+        });
+
+        if (closeVideoModalButton && videoModal && modalVideoPlayer) {
+            closeVideoModalButton.addEventListener('click', () => {
+                videoModal.style.display = 'none';
+                modalVideoPlayer.pause();
+                modalVideoPlayer.src = ''; // Clear source
+            });
+        }
+
+        if (videoModal && modalVideoPlayer) {
+            // Close modal if user clicks outside the video content
+            videoModal.addEventListener('click', (event) => {
+                if (event.target === videoModal) { // Check if the click is on the overlay itself
+                    videoModal.style.display = 'none';
+                    modalVideoPlayer.pause();
+                    modalVideoPlayer.src = ''; // Clear source
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>

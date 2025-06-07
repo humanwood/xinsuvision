@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更多成功故事 - 心速视觉</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+            background-color: #f8fafc; /* bg-slate-50 */
+            color: #334155; /* text-slate-700 */
+        }
+        .video-thumbnail-card {
+            background-color: #fff; /* bg-white */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); /* shadow-lg */
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .video-thumbnail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-xl */
+        }
+        .video-thumbnail-card img {
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            width: 100%;
+        }
+        .play-icon-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .video-thumbnail-card:hover .play-icon-overlay {
+            opacity: 1;
+        }
+        .play-icon-overlay svg {
+            width: 4rem; /* w-16 */
+            height: 4rem; /* h-16 */
+            color: white;
+        }
+
+        /* Video Modal Styles (Copied from main page for consistency) */
+        .video-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+        .video-modal-content {
+            background-color: #111;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .video-modal-content video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        .video-modal-close {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #fff;
+            color: #333;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1001;
+        }
+         .video-modal-close:hover {
+            background-color: #eee;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem; /* mb-8 */
+            color: #0D9488; /* teal-600 */
+            font-weight: 500; /* font-medium */
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="bg-white shadow-md py-4">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-teal-600">心速视觉</a>
+            <a href="index.html#cases" class="text-teal-600 hover:text-teal-700 transition-colors">返回主页</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-12 md:py-16">
+        <a href="index.html#cases" class="back-link">&laquo; 返回成功案例</a>
+        <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-8 md:mb-12 text-center">更多成功故事</h1>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="video-thumbnail-card video-trigger-more" data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E4%BC%91%E9%97%B2%E6%96%87%E6%97%85.mp4" data-img-width="560" data-img-height="315">
+                <div class="relative">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E4%BC%91%E9%97%B2%E6%96%87%E6%97%85.png" alt="案例视频 1 缩略图">
+                    <div class="play-icon-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-teal-700 mb-1">休闲文旅</h3>
+                    <p class="text-sm text-slate-600">休闲文旅赛道案例展示。</p>
+                </div>
+            </div>
+
+            <div class="video-thumbnail-card video-trigger-more" data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E5%85%BB%E7%94%9F%E5%A4%A7%E5%81%A5%E5%BA%B7.mp4" data-img-width="560" data-img-height="315">
+                <div class="relative">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E5%85%BB%E7%94%9F%E5%A4%A7%E5%81%A5%E5%BA%B7.png" alt="养生大健康 缩略图">
+                     <div class="play-icon-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-teal-700 mb-1">养生大健康</h3>
+                    <p class="text-sm text-slate-600">养生大健康赛道案例展示。</p>
+                </div>
+            </div>
+
+            <div class="video-thumbnail-card video-trigger-more" data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E5%9B%BD%E5%AD%A6%E4%B8%AD%E5%8C%BB.mp4" data-img-width="560" data-img-height="315">
+                 <div class="relative">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E5%9B%BD%E5%AD%A6%E4%B8%AD%E5%8C%BB.png" alt="国学中医 缩略图">
+                     <div class="play-icon-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-teal-700 mb-1">国学中医</h3>
+                    <p class="text-sm text-slate-600">国学中医赛道案例展示。</p>
+                </div>
+            </div>
+
+            <div class="video-thumbnail-card video-trigger-more" data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E5%AE%B6%E5%B1%85%E5%BB%BA%E6%9D%90.mp4" data-img-width="560" data-img-height="315">
+                 <div class="relative">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E5%AE%B6%E5%B1%85%E5%BB%BA%E6%9D%90.png" alt="家居建材 缩略图">
+                     <div class="play-icon-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-teal-700 mb-1">家居建材</h3>
+                    <p class="text-sm text-slate-600">家居建材赛道案例展示。</p>
+                </div>
+            </div>
+
+            <div class="video-thumbnail-card video-trigger-more" data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E7%BE%8E%E4%B8%9A%E6%A1%88%E4%BE%8B.mp4" data-img-width="560" data-img-height="315">
+                 <div class="relative">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E7%BE%8E%E4%B8%9A%E6%A1%88%E4%BE%8B.png" alt="美业案例 缩略图">
+                     <div class="play-icon-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-teal-700 mb-1">美业行业</h3>
+                    <p class="text-sm text-slate-600">美业行业赛道案例展示。</p>
+                </div>
+            </div>
+
+            <div class="video-thumbnail-card video-trigger-more" data-video-src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E9%A4%90%E9%A5%AE.mp4" data-img-width="560" data-img-height="315">
+                 <div class="relative">
+                    <img src="http://swupgox3j.hn-bkt.clouddn.com/xinsuppt/videos/%E9%A4%90%E9%A5%AE.png" alt="餐饮行业 缩略图">
+                     <div class="play-icon-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-teal-700 mb-1">餐饮行业</h3>
+                    <p class="text-sm text-slate-600">餐饮行业赛道案例展示。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 py-8 text-center mt-12 md:mt-16">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>&copy; <span id="currentYearMore"></span> 深圳艺心灵文化传媒有限公司. 心速视觉. 版权所有.</p>
+            <p class="text-sm mt-2">
+                <a href="index.html#contact" class="hover:underline">联系我们</a> | 
+                <a href="index.html#pricing" class="hover:underline">服务价格</a>
+            </p>
+        </div>
+    </footer>
+
+    <div id="videoModalMore" class="video-modal-overlay">
+        <div id="videoModalContentMore" class="video-modal-content">
+            <button id="closeVideoModalMore" class="video-modal-close">&times;</button>
+            <video id="modalVideoPlayerMore" controls autoplay muted playsinline>
+                您的浏览器不支持HTML5视频。
+            </video>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('currentYearMore').textContent = new Date().getFullYear();
+
+        // Video Modal Functionality for this page
+        const videoModalMore = document.getElementById('videoModalMore');
+        const videoModalContentMore = document.getElementById('videoModalContentMore');
+        const modalVideoPlayerMore = document.getElementById('modalVideoPlayerMore');
+        const closeVideoModalButtonMore = document.getElementById('closeVideoModalMore');
+        const videoTriggersMore = document.querySelectorAll('.video-trigger-more');
+
+        videoTriggersMore.forEach(trigger => {
+            trigger.addEventListener('click', function(event) {
+                event.preventDefault();
+                const videoSrc = this.dataset.videoSrc;
+                // For this page, we'll use a fixed size for the modal, or derive from data attributes if needed.
+                // Let's use a common large size for better viewing.
+                let modalWidth = this.dataset.imgWidth ? parseInt(this.dataset.imgWidth) * 1.5 : 800; // Default to 800px or 1.5x placeholder
+                let modalHeight = this.dataset.imgHeight ? parseInt(this.dataset.imgHeight) * 1.5 : 450; // Default to 450px or 1.5x placeholder
+
+                const viewportWidth = window.innerWidth * 0.9;
+                const viewportHeight = window.innerHeight * 0.9;
+                const aspectRatio = modalWidth / modalHeight;
+
+                if (modalWidth > viewportWidth) {
+                    modalWidth = viewportWidth;
+                    modalHeight = modalWidth / aspectRatio;
+                }
+                if (modalHeight > viewportHeight) {
+                    modalHeight = viewportHeight;
+                    modalWidth = modalHeight * aspectRatio;
+                }
+                
+                modalWidth = Math.max(modalWidth, 320);
+                modalHeight = Math.max(modalHeight, 180);
+
+
+                if (videoSrc && videoModalMore && modalVideoPlayerMore && videoModalContentMore) {
+                    videoModalContentMore.style.width = `${modalWidth}px`;
+                    videoModalContentMore.style.height = `${modalHeight}px`;
+                    
+                    modalVideoPlayerMore.src = videoSrc;
+                    videoModalMore.style.display = 'flex';
+                    modalVideoPlayerMore.load();
+                    modalVideoPlayerMore.play().catch(error => console.error("Video play failed:", error));
+                }
+            });
+        });
+
+        if (closeVideoModalButtonMore && videoModalMore && modalVideoPlayerMore) {
+            closeVideoModalButtonMore.addEventListener('click', () => {
+                videoModalMore.style.display = 'none';
+                modalVideoPlayerMore.pause();
+                modalVideoPlayerMore.src = '';
+            });
+        }
+
+        if (videoModalMore && modalVideoPlayerMore) {
+            videoModalMore.addEventListener('click', (event) => {
+                if (event.target === videoModalMore) {
+                    videoModalMore.style.display = 'none';
+                    modalVideoPlayerMore.pause();
+                    modalVideoPlayerMore.src = '';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
